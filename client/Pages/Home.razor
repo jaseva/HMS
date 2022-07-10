@@ -1,0 +1,23 @@
+﻿@page "/"
+@page "/home"
+@layout MainLayout
+@inherits Hms.Pages.HomeComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using Hms.Models.DataSource
+@using Hms.Models.TelemetryServer
+@using Microsoft.AspNetCore.Identity;
+@using Hms.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>Home</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Home">
+    </RadzenHeading>
+    <RadzenHtml>
+      <p><b>Welcome to the Hazard Management System (HMS) for the HeroX NASA Mars XR Hackathon.</b></p>
+    </RadzenHtml>
+  </ChildContent>
+</RadzenContent>

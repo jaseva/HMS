@@ -1,0 +1,67 @@
+﻿@page "/simulationcontrols"
+@layout MainLayout
+@inherits Hms.Pages.SimulationcontrolsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using Hms.Models.DataSource
+@using Hms.Models.TelemetryServer
+@using Microsoft.AspNetCore.Identity;
+@using Hms.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>Simulationcontrols</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Simulationcontrols">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenSplitButton Icon="get_app" style="margin-left: 10px; margin-bottom: 10px" Text="Export" Click="@Splitbutton0Click">
+          <ChildContent>
+            <RadzenSplitButtonItem Text="Excel" Value="xlsx">
+            </RadzenSplitButtonItem>
+            <RadzenSplitButtonItem Text="CSV" Value="csv">
+            </RadzenSplitButtonItem>
+          </ChildContent>
+        </RadzenSplitButton>
+        <RadzenTextBox Placeholder="Search ..." style="display: block; margin-bottom: 10px; width: 100%" Name="Textbox0" @oninput="@(async(args) => {search = $"{args.Value}";await grid0.GoToPage(0);await grid0.Reload();})">
+        </RadzenTextBox>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" FilterMode="Radzen.FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@getSimulationcontrolsResult" Count="@getSimulationcontrolsCount" TItem="Hms.Models.TelemetryServer.Simulationcontrol" LoadData="@Grid0LoadData" RowDoubleClick="@Grid0RowDoubleClick">
+          <Columns>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationcontrol" Property="id" Title="Id">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationcontrol" Property="room" Title="Room">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationcontrol" Property="started_at" Title="Started At">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationcontrol" Property="suit_power" Title="Suit Power">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationcontrol" Property="o2_switch" Title="O 2 Switch">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationcontrol" Property="aux" Title="Aux">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationcontrol" Property="rca" Title="Rca">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationcontrol" Property="pump" Title="Pump">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationcontrol" Property="fan_switch" Title="Fan Switch">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationcontrol" Property="createdAt" FormatString="{0:MM/dd/yyyy}" Title="Created At">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationcontrol" Property="updatedAt" FormatString="{0:MM/dd/yyyy}" Title="Updated At">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationcontrol" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="hmsModelsTelemetryServerSimulationcontrol">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, hmsModelsTelemetryServerSimulationcontrol))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

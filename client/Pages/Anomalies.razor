@@ -1,0 +1,43 @@
+﻿@page "/anomalies"
+@layout MainLayout
+@inherits Hms.Pages.AnomaliesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using Hms.Models.DataSource
+@using Hms.Models.TelemetryServer
+@using Microsoft.AspNetCore.Identity;
+@using Hms.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>Anomalies</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Anomalies">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenSplitButton Icon="get_app" style="margin-left: 0px; margin-bottom: 10px" Text="Export" Click="@Splitbutton0Click">
+          <ChildContent>
+            <RadzenSplitButtonItem Text="Excel" Value="xlsx">
+            </RadzenSplitButtonItem>
+            <RadzenSplitButtonItem Text="CSV" Value="csv">
+            </RadzenSplitButtonItem>
+          </ChildContent>
+        </RadzenSplitButton>
+        <RadzenTextBox Placeholder="Search ..." style="display: block; margin-bottom: 10px; width: 100%" Name="Textbox0" @oninput="@(async(args) => {search = $"{args.Value}";await grid0.GoToPage(0);await grid0.Reload();})">
+        </RadzenTextBox>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" FilterMode="Radzen.FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@getAnomaliesResult" Count="@getAnomaliesCount" TItem="Hms.Models.DataSource.Anomaly" LoadData="@Grid0LoadData">
+          <Columns>
+            <RadzenDataGridColumn TItem="Hms.Models.DataSource.Anomaly" Property="ID" Title="ID">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.DataSource.Anomaly" Property="Title" Title="Title">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.DataSource.Anomaly" Property="Description" Title="Description">
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

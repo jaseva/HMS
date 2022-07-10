@@ -1,0 +1,55 @@
+﻿@page "/users"
+@layout MainLayout
+@inherits Hms.Pages.UsersComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using Hms.Models.DataSource
+@using Hms.Models.TelemetryServer
+@using Microsoft.AspNetCore.Identity;
+@using Hms.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>Users</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Users">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenSplitButton Icon="get_app" style="margin-left: 10px; margin-bottom: 10px" Text="Export" Click="@Splitbutton0Click">
+          <ChildContent>
+            <RadzenSplitButtonItem Text="Excel" Value="xlsx">
+            </RadzenSplitButtonItem>
+            <RadzenSplitButtonItem Text="CSV" Value="csv">
+            </RadzenSplitButtonItem>
+          </ChildContent>
+        </RadzenSplitButton>
+        <RadzenTextBox Placeholder="Search ..." style="display: block; margin-bottom: 10px; width: 100%" Name="Textbox0" @oninput="@(async(args) => {search = $"{args.Value}";await grid0.GoToPage(0);await grid0.Reload();})">
+        </RadzenTextBox>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" FilterMode="Radzen.FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@getUsersResult" Count="@getUsersCount" TItem="Hms.Models.TelemetryServer.User" LoadData="@Grid0LoadData" RowDoubleClick="@Grid0RowDoubleClick">
+          <Columns>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.User" Property="id" Title="Id">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.User" Property="username" Title="Username">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.User" Property="room" Title="Room">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.User" Property="createdAt" FormatString="{0:MM/dd/yyyy}" Title="Created At">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.User" Property="updatedAt" FormatString="{0:MM/dd/yyyy}" Title="Updated At">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.User" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="hmsModelsTelemetryServerUser">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, hmsModelsTelemetryServerUser))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

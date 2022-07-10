@@ -1,0 +1,200 @@
+{
+  "info": {
+    "title": "Data Source",
+    "x-type": "odata",
+    "x-connector": "mssql",
+    "x-connector-version": 15,
+    "x-infer-aspnet": false,
+    "x-infer-tables": true,
+    "x-infer-relations": true,
+    "x-infer-views": true,
+    "x-infer-sps": true
+  },
+  "definitions": {
+    "Anomaly": {
+      "x-table": "dbo.Anomalies",
+      "resource": "Anomalies",
+      "required": [],
+      "properties": {
+        "ID": {
+          "x-precision": 10,
+          "type": "integer",
+          "x-key": true,
+          "x-virtual": true
+        },
+        "Title": {
+          "type": "string",
+          "length": 50
+        },
+        "Description": {
+          "type": "string",
+          "length": 50
+        }
+      },
+      "x-view": true
+    },
+    "Rock": {
+      "x-table": "dbo.Rocks",
+      "resource": "Rocks",
+      "required": [],
+      "properties": {
+        "ID": {
+          "x-precision": 10,
+          "type": "integer",
+          "x-key": true,
+          "x-virtual": true
+        },
+        "Title": {
+          "type": "string",
+          "length": 50
+        },
+        "Description": {
+          "type": "string",
+          "length": 50
+        }
+      },
+      "x-view": true
+    }
+  },
+  "paths": {
+    "/Anomalies": {
+      "get": {
+        "operationId": "getAnomalies",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Anomaly"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Rocks": {
+      "get": {
+        "operationId": "getRocks",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Rock"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "basePath": "/odata/DataSource",
+  "host": "localhost:5001",
+  "schemes": [
+    "https"
+  ]
+}

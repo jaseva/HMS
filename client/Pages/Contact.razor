@@ -1,0 +1,19 @@
+﻿@page "/contact"
+@layout MainLayout
+@inherits Hms.Pages.ContactComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using Hms.Models.DataSource
+@using Hms.Models.TelemetryServer
+@using Microsoft.AspNetCore.Identity;
+@using Hms.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>Contact</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Contact">
+    </RadzenHeading>
+  </ChildContent>
+</RadzenContent>

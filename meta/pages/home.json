@@ -1,0 +1,24 @@
+{
+  "access": "Authenticated",
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Home",
+          "type": "heading"
+        },
+        {
+          "content": "<p><b>Welcome to the Hazard Management System (HMS) for the HeroX NASA Mars XR Hackathon.</b></p>",
+          "name": "html0",
+          "type": "html"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "layout": "Main",
+  "name": "Home"
+}

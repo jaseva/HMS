@@ -1,0 +1,2216 @@
+{
+  "info": {
+    "title": "Telemetry Server",
+    "x-type": "odata",
+    "x-connector": "sqlite"
+  },
+  "definitions": {
+    "Location": {
+      "x-table": "dbo.locations",
+      "resource": "Locations",
+      "required": [
+        "user",
+        "room",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "user": {
+          "x-nullable": false,
+          "type": "integer"
+        },
+        "room": {
+          "x-nullable": false,
+          "type": "integer"
+        },
+        "createdAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Lsar": {
+      "x-table": "dbo.lsars",
+      "resource": "Lsars",
+      "required": [
+        "sender",
+        "room",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "sender": {
+          "x-nullable": false,
+          "type": "integer"
+        },
+        "room": {
+          "x-nullable": false,
+          "type": "integer"
+        },
+        "time": {
+          "type": "string"
+        },
+        "priority_tag": {
+          "type": "string"
+        },
+        "encoded_lat": {
+          "type": "string"
+        },
+        "encoded_lon": {
+          "type": "string"
+        },
+        "pnt_source": {
+          "type": "string"
+        },
+        "condition_state": {
+          "type": "string"
+        },
+        "vmc_txt": {
+          "type": "string"
+        },
+        "tac_sn": {
+          "type": "string"
+        },
+        "cntry_code": {
+          "type": "string"
+        },
+        "homing_dvc_stat": {
+          "type": "string"
+        },
+        "ret_lnk_stat": {
+          "type": "string"
+        },
+        "test_proto": {
+          "type": "string"
+        },
+        "vessel_id": {
+          "type": "string"
+        },
+        "beacon_type": {
+          "type": "string"
+        },
+        "createdAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Role": {
+      "x-table": "dbo.roles",
+      "resource": "Roles",
+      "required": [
+        "role1",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "role1": {
+          "x-original-name": "role",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "createdAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Room": {
+      "x-table": "dbo.rooms",
+      "resource": "Rooms",
+      "required": [
+        "name",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "name": {
+          "x-nullable": false,
+          "type": "string"
+        },
+        "users": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer"
+        },
+        "createdAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Simulationcontrol": {
+      "x-table": "dbo.simulationcontrols",
+      "resource": "Simulationcontrols",
+      "required": [
+        "room",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "room": {
+          "x-nullable": false,
+          "type": "integer"
+        },
+        "started_at": {
+          "type": "string"
+        },
+        "suit_power": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "o2_switch": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "aux": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "rca": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "pump": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "fan_switch": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "createdAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Simulationfailure": {
+      "x-table": "dbo.simulationfailures",
+      "resource": "Simulationfailures",
+      "required": [
+        "room",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "room": {
+          "x-nullable": false,
+          "type": "integer"
+        },
+        "started_at": {
+          "type": "string"
+        },
+        "o2_error": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "pump_error": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "power_error": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "fan_error": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "createdAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Simulationstate": {
+      "x-table": "dbo.simulationstates",
+      "resource": "Simulationstates",
+      "required": [
+        "room",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "room": {
+          "x-nullable": false,
+          "type": "integer"
+        },
+        "isRunning": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "isPaused": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "timer": {
+          "x-default-sql": "'00:00:00'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "started_at": {
+          "x-default-sql": "'00:00:00'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "t_battery": {
+          "x-default-sql": "'00:00:00'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "t_oxygen": {
+          "x-default-sql": "'00:00:00'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "t_water": {
+          "x-default-sql": "'00:00:00'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "createdAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Simulationstateuium": {
+      "x-table": "dbo.simulationstateuia",
+      "resource": "Simulationstateuia",
+      "required": [
+        "room",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "room": {
+          "x-nullable": false,
+          "type": "integer"
+        },
+        "started_at": {
+          "type": "string"
+        },
+        "emu1": {
+          "x-default-sql": "'OFF'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "emu2": {
+          "x-default-sql": "'OFF'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "ev1_supply": {
+          "x-default-sql": "'CLOSE'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "ev2_supply": {
+          "x-default-sql": "'CLOSE'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "ev1_waste": {
+          "x-default-sql": "'CLOSE'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "ev2_waste": {
+          "x-default-sql": "'CLOSE'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "emu1_O2": {
+          "x-default-sql": "'CLOSE'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "emu2_O2": {
+          "x-default-sql": "'CLOSE'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "O2_vent": {
+          "x-default-sql": "'CLOSE'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "depress_pump": {
+          "x-default-sql": "'FAULT'",
+          "x-nullable": false,
+          "type": "string"
+        },
+        "createdAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Simulationuium": {
+      "x-table": "dbo.simulationuia",
+      "resource": "Simulationuia",
+      "required": [
+        "room",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "room": {
+          "x-nullable": false,
+          "type": "integer"
+        },
+        "started_at": {
+          "type": "string"
+        },
+        "emu1": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "ev1_supply": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "ev1_waste": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "emu1_O2": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "emu2": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "ev2_supply": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "ev2_waste": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "emu2_O2": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "O2_vent": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "depress_pump": {
+          "x-default-sql": "0",
+          "x-nullable": false,
+          "type": "integer",
+          "format": "byte"
+        },
+        "createdAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "User": {
+      "x-table": "dbo.users",
+      "resource": "Users",
+      "required": [
+        "username",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "x-key": true,
+          "type": "integer"
+        },
+        "username": {
+          "x-nullable": false,
+          "type": "string"
+        },
+        "room": {
+          "type": "integer"
+        },
+        "createdAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/Locations": {
+      "get": {
+        "operationId": "getLocations",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Location"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createLocation",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Location",
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Lsars": {
+      "get": {
+        "operationId": "getLsars",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Lsar"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createLsar",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Lsar",
+            "schema": {
+              "$ref": "#/definitions/Lsar"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Lsar"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Roles": {
+      "get": {
+        "operationId": "getRoles",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Role"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createRole",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Role",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Rooms": {
+      "get": {
+        "operationId": "getRooms",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Room"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createRoom",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Room",
+            "schema": {
+              "$ref": "#/definitions/Room"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Room"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Simulationcontrols": {
+      "get": {
+        "operationId": "getSimulationcontrols",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Simulationcontrol"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createSimulationcontrol",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Simulationcontrol",
+            "schema": {
+              "$ref": "#/definitions/Simulationcontrol"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Simulationcontrol"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Simulationfailures": {
+      "get": {
+        "operationId": "getSimulationfailures",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Simulationfailure"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createSimulationfailure",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Simulationfailure",
+            "schema": {
+              "$ref": "#/definitions/Simulationfailure"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Simulationfailure"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Simulationstates": {
+      "get": {
+        "operationId": "getSimulationstates",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Simulationstate"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createSimulationstate",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Simulationstate",
+            "schema": {
+              "$ref": "#/definitions/Simulationstate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Simulationstate"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Simulationstateuia": {
+      "get": {
+        "operationId": "getSimulationstateuia",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Simulationstateuium"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createSimulationstateuium",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Simulationstateuium",
+            "schema": {
+              "$ref": "#/definitions/Simulationstateuium"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Simulationstateuium"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Simulationuia": {
+      "get": {
+        "operationId": "getSimulationuia",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Simulationuium"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createSimulationuium",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Simulationuium",
+            "schema": {
+              "$ref": "#/definitions/Simulationuium"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Simulationuium"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Users": {
+      "get": {
+        "operationId": "getUsers",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/User"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createUser",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "User",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Locations({id})": {
+      "delete": {
+        "operationId": "deleteLocation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getLocationByid",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateLocation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Location",
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Lsars({id})": {
+      "delete": {
+        "operationId": "deleteLsar",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getLsarByid",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Lsar"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateLsar",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Lsar",
+            "schema": {
+              "$ref": "#/definitions/Lsar"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Roles({id})": {
+      "delete": {
+        "operationId": "deleteRole",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getRoleByid",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateRole",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Role",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Rooms({id})": {
+      "delete": {
+        "operationId": "deleteRoom",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getRoomByid",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Room"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateRoom",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Room",
+            "schema": {
+              "$ref": "#/definitions/Room"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Simulationcontrols({id})": {
+      "delete": {
+        "operationId": "deleteSimulationcontrol",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getSimulationcontrolByid",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Simulationcontrol"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateSimulationcontrol",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Simulationcontrol",
+            "schema": {
+              "$ref": "#/definitions/Simulationcontrol"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Simulationfailures({id})": {
+      "delete": {
+        "operationId": "deleteSimulationfailure",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getSimulationfailureByid",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Simulationfailure"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateSimulationfailure",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Simulationfailure",
+            "schema": {
+              "$ref": "#/definitions/Simulationfailure"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Simulationstates({id})": {
+      "delete": {
+        "operationId": "deleteSimulationstate",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getSimulationstateByid",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Simulationstate"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateSimulationstate",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Simulationstate",
+            "schema": {
+              "$ref": "#/definitions/Simulationstate"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Simulationstateuia({id})": {
+      "delete": {
+        "operationId": "deleteSimulationstateuium",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getSimulationstateuiumByid",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Simulationstateuium"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateSimulationstateuium",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Simulationstateuium",
+            "schema": {
+              "$ref": "#/definitions/Simulationstateuium"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Simulationuia({id})": {
+      "delete": {
+        "operationId": "deleteSimulationuium",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getSimulationuiumByid",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Simulationuium"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateSimulationuium",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Simulationuium",
+            "schema": {
+              "$ref": "#/definitions/Simulationuium"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Users({id})": {
+      "delete": {
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getUserByid",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "User",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "basePath": "/odata/TelemetryServer",
+  "host": "localhost:5001",
+  "schemes": [
+    "https"
+  ]
+}

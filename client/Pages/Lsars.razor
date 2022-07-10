@@ -1,0 +1,83 @@
+﻿@page "/lsars"
+@layout MainLayout
+@inherits Hms.Pages.LsarsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using Hms.Models.DataSource
+@using Hms.Models.TelemetryServer
+@using Microsoft.AspNetCore.Identity;
+@using Hms.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>Lsars</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Lsars">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenSplitButton Icon="get_app" style="margin-left: 10px; margin-bottom: 10px" Text="Export" Click="@Splitbutton0Click">
+          <ChildContent>
+            <RadzenSplitButtonItem Text="Excel" Value="xlsx">
+            </RadzenSplitButtonItem>
+            <RadzenSplitButtonItem Text="CSV" Value="csv">
+            </RadzenSplitButtonItem>
+          </ChildContent>
+        </RadzenSplitButton>
+        <RadzenTextBox Placeholder="Search ..." style="display: block; margin-bottom: 10px; width: 100%" Name="Textbox0" @oninput="@(async(args) => {search = $"{args.Value}";await grid0.GoToPage(0);await grid0.Reload();})">
+        </RadzenTextBox>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" FilterMode="Radzen.FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@getLsarsResult" Count="@getLsarsCount" TItem="Hms.Models.TelemetryServer.Lsar" LoadData="@Grid0LoadData" RowDoubleClick="@Grid0RowDoubleClick">
+          <Columns>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="id" Title="Id">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="sender" Title="Sender">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="room" Title="Room">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="time" Title="Time">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="priority_tag" Title="Priority Tag">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="encoded_lat" Title="Encoded Lat">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="encoded_lon" Title="Encoded Lon">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="pnt_source" Title="Pnt Source">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="condition_state" Title="Condition State">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="vmc_txt" Title="Vmc Txt">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="tac_sn" Title="Tac Sn">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="cntry_code" Title="Cntry Code">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="homing_dvc_stat" Title="Homing Dvc Stat">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="ret_lnk_stat" Title="Ret Lnk Stat">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="test_proto" Title="Test Proto">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="vessel_id" Title="Vessel Id">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="beacon_type" Title="Beacon Type">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="createdAt" FormatString="{0:MM/dd/yyyy}" Title="Created At">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Property="updatedAt" FormatString="{0:MM/dd/yyyy}" Title="Updated At">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Lsar" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="hmsModelsTelemetryServerLsar">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, hmsModelsTelemetryServerLsar))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

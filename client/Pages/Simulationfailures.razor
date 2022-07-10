@@ -1,0 +1,63 @@
+﻿@page "/simulationfailures"
+@layout MainLayout
+@inherits Hms.Pages.SimulationfailuresComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using Hms.Models.DataSource
+@using Hms.Models.TelemetryServer
+@using Microsoft.AspNetCore.Identity;
+@using Hms.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>Simulationfailures</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Simulationfailures">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenSplitButton Icon="get_app" style="margin-left: 10px; margin-bottom: 10px" Text="Export" Click="@Splitbutton0Click">
+          <ChildContent>
+            <RadzenSplitButtonItem Text="Excel" Value="xlsx">
+            </RadzenSplitButtonItem>
+            <RadzenSplitButtonItem Text="CSV" Value="csv">
+            </RadzenSplitButtonItem>
+          </ChildContent>
+        </RadzenSplitButton>
+        <RadzenTextBox Placeholder="Search ..." style="display: block; margin-bottom: 10px; width: 100%" Name="Textbox0" @oninput="@(async(args) => {search = $"{args.Value}";await grid0.GoToPage(0);await grid0.Reload();})">
+        </RadzenTextBox>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" FilterMode="Radzen.FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@getSimulationfailuresResult" Count="@getSimulationfailuresCount" TItem="Hms.Models.TelemetryServer.Simulationfailure" LoadData="@Grid0LoadData" RowDoubleClick="@Grid0RowDoubleClick">
+          <Columns>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationfailure" Property="id" Title="Id">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationfailure" Property="room" Title="Room">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationfailure" Property="started_at" Title="Started At">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationfailure" Property="o2_error" Title="O 2 Error">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationfailure" Property="pump_error" Title="Pump Error">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationfailure" Property="power_error" Title="Power Error">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationfailure" Property="fan_error" Title="Fan Error">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationfailure" Property="createdAt" FormatString="{0:MM/dd/yyyy}" Title="Created At">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationfailure" Property="updatedAt" FormatString="{0:MM/dd/yyyy}" Title="Updated At">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationfailure" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="hmsModelsTelemetryServerSimulationfailure">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, hmsModelsTelemetryServerSimulationfailure))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

@@ -1,0 +1,75 @@
+﻿@page "/simulationstateuia"
+@layout MainLayout
+@inherits Hms.Pages.SimulationstateuiaComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using Hms.Models.DataSource
+@using Hms.Models.TelemetryServer
+@using Microsoft.AspNetCore.Identity;
+@using Hms.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>Simulationstateuia</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Simulationstateuia">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenSplitButton Icon="get_app" style="margin-left: 10px; margin-bottom: 10px" Text="Export" Click="@Splitbutton0Click">
+          <ChildContent>
+            <RadzenSplitButtonItem Text="Excel" Value="xlsx">
+            </RadzenSplitButtonItem>
+            <RadzenSplitButtonItem Text="CSV" Value="csv">
+            </RadzenSplitButtonItem>
+          </ChildContent>
+        </RadzenSplitButton>
+        <RadzenTextBox Placeholder="Search ..." style="display: block; margin-bottom: 10px; width: 100%" Name="Textbox0" @oninput="@(async(args) => {search = $"{args.Value}";await grid0.GoToPage(0);await grid0.Reload();})">
+        </RadzenTextBox>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" FilterMode="Radzen.FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@getSimulationstateuiaResult" Count="@getSimulationstateuiaCount" TItem="Hms.Models.TelemetryServer.Simulationstateuium" LoadData="@Grid0LoadData" RowDoubleClick="@Grid0RowDoubleClick">
+          <Columns>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="id" Title="Id">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="room" Title="Room">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="started_at" Title="Started At">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="emu1" Title="Emu 1">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="emu2" Title="Emu 2">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="ev1_supply" Title="Ev 1 Supply">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="ev2_supply" Title="Ev 2 Supply">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="ev1_waste" Title="Ev 1 Waste">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="ev2_waste" Title="Ev 2 Waste">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="emu1_O2" Title="Emu 1 O 2">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="emu2_O2" Title="Emu 2 O 2">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="O2_vent" Title="O 2 Vent">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="depress_pump" Title="Depress Pump">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="createdAt" FormatString="{0:MM/dd/yyyy}" Title="Created At">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Property="updatedAt" FormatString="{0:MM/dd/yyyy}" Title="Updated At">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Hms.Models.TelemetryServer.Simulationstateuium" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="hmsModelsTelemetryServerSimulationstateuium">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, hmsModelsTelemetryServerSimulationstateuium))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>
