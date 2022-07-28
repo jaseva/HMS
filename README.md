@@ -9,9 +9,9 @@ The sustainable exploration of Mars will require autonomous and operational flex
 [2] Moon to Mars Overview. NASA. Retried May 26, 2022, from https://www.nasa.gov/topics/moon-to-mars/overview><br>
 [3]MEDA. Accessed July 23, 2022 from https://mars.nasa.gov/mars2020/spacecraft/instruments/meda/<br>
 [4] Attachment J-02 XEVAS SYSTEM REQUIREMENTS DOCUMENT (SRD). National Aeronautics and Space Administration. NASA. Retrieved June 6, 2022, from https://www.nasa.gov/jsc/procurement/xevas<br>
-[5]SuperCam. Accessed July 22, 2022 from https://mars.nasa.gov/mars2020/spacecraft/instruments/supercam/<br><br>
+[5]SuperCam. Accessed July 22, 2022 from https://mars.nasa.gov/mars2020/spacecraft/instruments/supercam/<br>
 
-<H2><b>Architecture</b></H2>
- 
+<H2><b>Architecture</b></H2> 
+
  ![image](https://user-images.githubusercontent.com/5480431/181408849-81c5c5b4-2e7b-4cb6-a5d4-5f70694d28ff.png)
 
