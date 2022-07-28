@@ -12,7 +12,7 @@ The sustainable exploration of Mars will require autonomous and operational flex
 
 <H2><b>Architecture</b></H2> 
 
- ![image](https://user-images.githubusercontent.com/5480431/181408849-81c5c5b4-2e7b-4cb6-a5d4-5f70694d28ff.png)
+ ![image](https://user-images.githubusercontent.com/5480431/181415775-4e375f06-f91b-4d12-b378-f7b2fb0ef6e5.png)
  
  <H2><b>Deployment</b></H2>
  
