@@ -1,7 +1,7 @@
 # HMS
-NASA Mars XR Hackathon Project<br><br>
+<H1>NASA Mars XR Hackathon Project</H1><br><br>
  
-Welcome to the Hazard Management System (HMS) for the HeroX NASA Mars XR Hackathon.
+<H2>Welcome to the Hazard Management System (HMS) for the HeroX NASA Mars XR Hackathon</H2>
 
 The sustainable exploration of Mars will require autonomous and operational flexibility [1] via countermeasures that support shifting levels of autonomy for earth independent exploration missions [2]. Navigation tools can assist with increasing autonomy during EVA operations. Our proposed Hazard Management System (HMS) seeks to address this by providing crews on Mars with real-time anomalous and hazard identification during navigation to assist with safe and effective execution of exploration EVAs. HMS is a web assembly database management system application that includes a website portal and mobile application (Android and Apple) for business end-users to sign-in and login to easily manage data that is needed for end-users within the UE5 XR application. The data will be stored within two databases (SQL and SQLite) and is pushed to an interactive dashboard system that end-users can consult with while using the XR UE5 application. Without the real-time support of Mission Control on Earth, HMS is meant to assist crew members with data analytics for complex operations during EVAs for real-time exploration.
 
