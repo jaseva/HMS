@@ -16,5 +16,5 @@ The sustainable exploration of Mars will require autonomous and operational flex
  
  <H2><b>Deployment</b></H2>
  
- In order to deploy, download the latest version of <a href="https://code.visualstudio.com/Download">Visual Studio Code</a> and build a local copy of this project.
+ In order to deploy, download the latest version of <a href="https://code.visualstudio.com/Download" target="_blank">Visual Studio Code</a> and build a local copy of this project.
 
