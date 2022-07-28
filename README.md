@@ -1,5 +1,4 @@
-# HMS
-<H1>NASA Mars XR Hackathon Project</H1><br><br>
+<H1>NASA Mars XR Hackathon Project</H1>
  
 <H2>Welcome to the Hazard Management System (HMS) for the HeroX NASA Mars XR Hackathon</H2>
 
